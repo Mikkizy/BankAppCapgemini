@@ -19,7 +19,7 @@ class PaymentDataTest {
     @Test
     fun `isValidForDomestic returns false for invalid amount`() {
         val paymentData = PaymentData(
-            recipientName = "John Doe",
+            recipientName = "John Maxwell",
             accountNumber = "123456789",
             amount = "invalid"
         )

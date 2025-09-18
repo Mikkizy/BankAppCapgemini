@@ -10,18 +10,12 @@ class ProcessPaymentUseCase @Inject constructor() {
     suspend fun execute(paymentData: PaymentData, transferType: TransferType): PaymentResult {
         return try {
             // Simulate API call
-            delay(2000)
+            delay(1000)
 
-            // Simulate random success/failure for demo
-            val success = (0..10).random() > 2
+            PaymentResult.Success(generateTransactionId())
 
-            if (success) {
-                PaymentResult.Success(generateTransactionId())
-            } else {
-                PaymentResult.Error("Payment processing failed. Please try again.")
-            }
         } catch (e: Exception) {
-            PaymentResult.Error("Network error: ${e.message}")
+            PaymentResult.Error("Payment processing failed. Please try again: ${e.message}")
         }
     }
 
