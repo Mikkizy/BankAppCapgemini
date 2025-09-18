@@ -1,13 +1,11 @@
 package com.mcu.bankapp.domain.usecases
 
-import com.mcu.bankapp.domain.models.PaymentData
-import com.mcu.bankapp.domain.models.TransferType
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class ProcessPaymentUseCase @Inject constructor() {
 
-    suspend fun execute(paymentData: PaymentData, transferType: TransferType): PaymentResult {
+    suspend fun execute(): PaymentResult {
         return try {
             // Simulate API call
             delay(1000)

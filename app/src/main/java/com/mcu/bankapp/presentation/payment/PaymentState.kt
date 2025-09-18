@@ -5,7 +5,7 @@ import com.mcu.bankapp.domain.models.TransferType
 import com.mcu.bankapp.domain.models.UserAccount
 import com.mcu.bankapp.domain.usecases.PaymentResult
 
-data class PaymentUiState(
+data class PaymentState(
     val transferType: TransferType = TransferType.DOMESTIC,
     val paymentData: PaymentData = PaymentData(),
     val userAccount: UserAccount = UserAccount(),

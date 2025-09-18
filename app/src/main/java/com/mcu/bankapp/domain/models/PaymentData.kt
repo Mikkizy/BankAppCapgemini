@@ -31,7 +31,6 @@ data class PaymentData(
     private fun isValidSwiftCode(swiftCode: String): Boolean {
         // SWIFT code format: AAAA-BB-CC-12 (4 letters, 2 letters, 2 letters/digits, 2 digits)
         val swiftPattern = "^[A-Z]{4}-[A-Z]{2}-[A-Z0-9]{2}-[0-9]{2}$".toRegex()
-        val swiftPatternUK = "^[A-Z]{6}[A-Z0-9]{2}?[A-Z0-9]{3}?$".toRegex()
         return swiftPattern.matches(swiftCode)
     }
 

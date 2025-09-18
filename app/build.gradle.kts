@@ -8,6 +8,12 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
 }
 
+tasks.withType<Test>{
+    testLogging{
+        showStandardStreams = true
+    }
+}
+
 android {
     namespace = "com.mcu.bankapp"
     compileSdk = 36
@@ -109,4 +115,5 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation(libs.robolectric)
     testImplementation(libs.ui.test.junit4)
+    testImplementation(libs.turbine)
 }

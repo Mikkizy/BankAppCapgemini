@@ -26,17 +26,17 @@ class PaymentViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(PaymentUiState())
+    private val _uiState = MutableStateFlow(PaymentState())
 
-    val uiState: StateFlow<PaymentUiState> = combine(
+    val uiState: StateFlow<PaymentState> = combine(
         _uiState,
         userRepository.getUserAccount()
-    ) { uiState: PaymentUiState, userAccount: UserAccount ->
+    ) { uiState: PaymentState, userAccount: UserAccount ->
         uiState.copy(userAccount = userAccount)
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
-        initialValue = PaymentUiState()
+        initialValue = PaymentState()
     )
 
     fun updateTransferType(transferType: TransferType) {
@@ -95,10 +95,7 @@ class PaymentViewModel @Inject constructor(
 
                     if (balanceResult.isSuccess) {
                         // Process payment
-                        val result = processPaymentUseCase.execute(
-                            currentState.paymentData,
-                            currentState.transferType
-                        )
+                        val result = processPaymentUseCase.execute()
 
                         _uiState.value = _uiState.value.copy(
                             isLoading = false,
@@ -127,6 +124,6 @@ class PaymentViewModel @Inject constructor(
     }
 
     fun resetForm() {
-        _uiState.value = PaymentUiState(transferType = _uiState.value.transferType)
+        _uiState.value = PaymentState(transferType = _uiState.value.transferType)
     }
 }

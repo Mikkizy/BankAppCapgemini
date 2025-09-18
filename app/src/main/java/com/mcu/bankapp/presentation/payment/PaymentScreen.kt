@@ -15,6 +15,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mcu.bankapp.domain.models.PaymentData
 import com.mcu.bankapp.domain.models.TransferType
 import com.mcu.bankapp.domain.usecases.PaymentResult
 import java.util.Locale
@@ -69,10 +70,16 @@ private fun formatSwiftCodeWithCursor(input: TextFieldValue): SwiftCodeFormatRes
 @Composable
 fun PaymentScreen(
     transferType: TransferType,
-    viewModel: PaymentViewModel = hiltViewModel(),
-    navigateToHome: () -> Unit
+    //viewModel: PaymentViewModel = hiltViewModel(),
+    navigateToHome: () -> Unit,
+    uiState: PaymentState,
+    updateTransferType: (transferType: TransferType) -> Unit,
+    clearPaymentResult: () -> Unit,
+    resetForm: () -> Unit,
+    updatePaymentData: (paymentData: PaymentData) -> Unit,
+    processPayment: () -> Unit
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    //val uiState by viewModel.uiState.collectAsState()
 
     // Local state for SWIFT code TextFieldValue to handle cursor positioning
     var swiftCodeFieldValue by remember { mutableStateOf(TextFieldValue(uiState.paymentData.swiftCode)) }
@@ -88,16 +95,17 @@ fun PaymentScreen(
     }
 
     LaunchedEffect(transferType) {
-        viewModel.updateTransferType(transferType)
+        //viewModel.updateTransferType(transferType)
+        updateTransferType(transferType)
     }
 
     // Handle payment result
     uiState.paymentResult?.let { result ->
         PaymentResultDialog(
             result = result,
-            onDismiss = { viewModel.clearPaymentResult() },
+            onDismiss = { clearPaymentResult() },
             onNewPayment = {
-                viewModel.resetForm()
+                resetForm()
                 navigateToHome()
             }
         )
@@ -161,7 +169,7 @@ fun PaymentScreen(
                     label = "Recipient Name",
                     value = uiState.paymentData.recipientName,
                     onValueChange = { newValue ->
-                        viewModel.updatePaymentData(
+                        updatePaymentData(
                             uiState.paymentData.copy(recipientName = newValue)
                         )
                     },
@@ -172,7 +180,7 @@ fun PaymentScreen(
                     label = "Account Number",
                     value = uiState.paymentData.accountNumber,
                     onValueChange = { newValue ->
-                        viewModel.updatePaymentData(
+                        updatePaymentData(
                             uiState.paymentData.copy(accountNumber = newValue)
                         )
                     },
@@ -184,7 +192,7 @@ fun PaymentScreen(
                     label = "Amount",
                     value = uiState.paymentData.amount,
                     onValueChange = { newValue ->
-                        viewModel.updatePaymentData(
+                        updatePaymentData(
                             uiState.paymentData.copy(amount = newValue)
                         )
                     },
@@ -200,7 +208,7 @@ fun PaymentScreen(
                         value = uiState.paymentData.iban,
                         onValueChange = { newValue ->
                             if (newValue.length <= 34) {
-                                viewModel.updatePaymentData(
+                                updatePaymentData(
                                     uiState.paymentData.copy(iban = newValue.uppercase())
                                 )
                             }
@@ -218,7 +226,7 @@ fun PaymentScreen(
                                 text = formatResult.formattedText,
                                 selection = TextRange(formatResult.cursorPosition)
                             )
-                            viewModel.updatePaymentData(
+                            updatePaymentData(
                                 uiState.paymentData.copy(swiftCode = formatResult.formattedText)
                             )
                         },
@@ -253,7 +261,7 @@ fun PaymentScreen(
 
         // Send Payment Button
         Button(
-            onClick = { viewModel.processPayment() },
+            onClick = { processPayment() },
             enabled = !uiState.isLoading,
             modifier = Modifier
                 .fillMaxWidth()
