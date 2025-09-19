@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">BankApp</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="account">Account</string>
+    <string name="current_balance">Current Balance</string>
+    <string name="make_a_transfer">Make a Transfer</string>
+    <string name="domestic_transfer">Domestic Transfer</string>
+    <string name="domestic_transfer_desc">Send money within the country</string>
+    <string name="international_transfer">International Transfer</string>
+    <string name="international_transfer_desc">Send money to another country</string>
+    <string name="available_balance">Available Balance</string>
+    <string name="send_payment">Send Payment</string>
+    <string name="recipient_name">Recipient Name</string>
+    <string name="account_number">Account Number</string>
+    <string name="amount">Amount</string>
+    <string name="iban">IBAN (max 34 characters)</string>
+    <string name="swift_code">SWIFT Code (AAAA-BB-CC-12)</string>
 </resources>

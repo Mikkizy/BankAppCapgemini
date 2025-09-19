@@ -8,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -15,6 +16,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mcu.bankapp.R
 import com.mcu.bankapp.domain.models.PaymentData
 import com.mcu.bankapp.domain.models.TransferType
 import com.mcu.bankapp.domain.usecases.PaymentResult
@@ -117,8 +119,8 @@ fun PaymentScreen(
         // Header
         Text(
             text = when (transferType) {
-                TransferType.DOMESTIC -> "Domestic Transfer"
-                TransferType.INTERNATIONAL -> "International Transfer"
+                TransferType.DOMESTIC -> stringResource(R.string.domestic_transfer)
+                TransferType.INTERNATIONAL -> stringResource(R.string.international_transfer)
             },
             style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
@@ -136,7 +138,7 @@ fun PaymentScreen(
                 modifier = Modifier.padding(16.dp)
             ) {
                 Text(
-                    text = "Available Balance",
+                    text = stringResource(R.string.available_balance),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -160,7 +162,7 @@ fun PaymentScreen(
             ) {
                 // Common fields
                 PaymentTextField(
-                    label = "Recipient Name",
+                    label = stringResource(R.string.recipient_name),
                     value = uiState.paymentData.recipientName,
                     onValueChange = { newValue ->
                         updatePaymentData(
@@ -171,7 +173,7 @@ fun PaymentScreen(
                 )
 
                 PaymentTextField(
-                    label = "Account Number",
+                    label = stringResource(R.string.account_number),
                     value = uiState.paymentData.accountNumber,
                     onValueChange = { newValue ->
                         updatePaymentData(
@@ -183,7 +185,7 @@ fun PaymentScreen(
                 )
 
                 PaymentTextField(
-                    label = "Amount",
+                    label = stringResource(R.string.amount),
                     value = uiState.paymentData.amount,
                     onValueChange = { newValue ->
                         updatePaymentData(
@@ -198,7 +200,7 @@ fun PaymentScreen(
                 // International-specific fields
                 if (transferType == TransferType.INTERNATIONAL) {
                     PaymentTextField(
-                        label = "IBAN (max 34 characters)",
+                        label = stringResource(R.string.iban),
                         value = uiState.paymentData.iban,
                         onValueChange = { newValue ->
                             if (newValue.length <= 34) {
@@ -212,7 +214,7 @@ fun PaymentScreen(
 
                     // Special SWIFT code field with cursor positioning
                     SwiftCodeTextField(
-                        label = "SWIFT Code (AAAA-BB-CC-12)",
+                        label = stringResource(R.string.swift_code),
                         value = swiftCodeFieldValue,
                         onValueChange = { newFieldValue ->
                             val formatResult = formatSwiftCodeWithCursor(newFieldValue)
@@ -268,7 +270,7 @@ fun PaymentScreen(
                     color = MaterialTheme.colorScheme.onPrimary
                 )
             } else {
-                Text("Send Payment")
+                Text(stringResource(R.string.send_payment))
             }
         }
     }

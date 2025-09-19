@@ -27,8 +27,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.mcu.bankapp.R
 import java.util.Locale
 
 @Composable
@@ -80,7 +82,7 @@ fun HomeScreen(
 
                     Column {
                         Text(
-                            text = "Welcome back,",
+                            text = stringResource(R.string.welcome_back),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
@@ -92,7 +94,7 @@ fun HomeScreen(
                             modifier = Modifier.testTag("UserNameText")
                         )
                         Text(
-                            text = "Account: ${homeState.accountNo}",
+                            text = stringResource(R.string.account) + ": ${homeState.accountNo}",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
@@ -111,7 +113,7 @@ fun HomeScreen(
                         modifier = Modifier.padding(16.dp)
                     ) {
                         Text(
-                            text = "Current Balance",
+                            text = stringResource(R.string.current_balance),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onPrimary
                         )
@@ -129,7 +131,7 @@ fun HomeScreen(
 
         // App Title
         Text(
-            text = "Make a Transfer",
+            text = stringResource(R.string.make_a_transfer),
             style = MaterialTheme.typography.headlineLarge,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -150,12 +152,12 @@ fun HomeScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "Domestic Transfer",
+                        text = stringResource(R.string.domestic_transfer),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Medium
                     )
                     Text(
-                        text = "Send money within the country",
+                        text = stringResource(R.string.domestic_transfer_desc),
                         style = MaterialTheme.typography.bodySmall
                     )
                 }
@@ -172,12 +174,12 @@ fun HomeScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "International Transfer",
+                        text = stringResource(R.string.international_transfer),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Medium
                     )
                     Text(
-                        text = "Send money to another country",
+                        text = stringResource(R.string.international_transfer_desc),
                         style = MaterialTheme.typography.bodySmall
                     )
                 }
