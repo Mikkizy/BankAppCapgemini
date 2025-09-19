@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -42,6 +43,7 @@ fun HomeScreen(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
+            .systemBarsPadding()
             .testTag("HomeScreen"),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {

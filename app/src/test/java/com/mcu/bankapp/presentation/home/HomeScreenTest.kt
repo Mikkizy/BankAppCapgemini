@@ -26,14 +26,12 @@ class HomeScreenTest {
 
     @Before
     fun setUp() {
-        // Store original locale and set to a known locale for consistent tests
         originalLocale = Locale.getDefault()
         Locale.setDefault(Locale.US)
     }
 
     @After
     fun tearDown() {
-        // Restore original locale
         originalLocale?.let { Locale.setDefault(it) }
     }
 

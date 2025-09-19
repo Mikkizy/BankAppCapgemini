@@ -298,7 +298,7 @@ class PaymentScreenTest {
         composeTestRule.onNodeWithTag("IbanField").performTextInput(longIban)
 
         // Then - Should be limited to 34 characters
-        assert(updatedPaymentData?.iban?.length ?: 0 <= 34)
+        assert((updatedPaymentData?.iban?.length ?: 0) <= 34)
     }
 
     @Test
@@ -350,12 +350,10 @@ class PaymentScreenTest {
 
         // Then
         composeTestRule.onNodeWithTag("SendPaymentButton").assertIsNotEnabled()
-        // CircularProgressIndicator should be visible (though hard to test directly)
     }
 
     @Test
     fun errorCard_hiddenWhenNoErrors() {
-        // Given - State with no errors (default samplePaymentState)
 
         // When
         composeTestRule.setContent {

@@ -108,7 +108,6 @@ class UserRepositoryImplTest {
         assertNotNull(updatedAccount)
         assertEquals(initialBalance - deductionAmount, updatedAccount!!.balance, 0.001)
 
-        // Verify the state is actually updated in the repository
         val repositoryAccount = userRepository.getUserAccount().first()
         assertEquals(updatedAccount.balance, repositoryAccount.balance, 0.001)
     }

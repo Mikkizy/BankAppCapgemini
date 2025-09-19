@@ -97,7 +97,7 @@ class PaymentViewModelTest {
         paymentViewModel.updatePaymentData(defaultPaymentData)
         paymentViewModel.processPayment()
 
-        // Then - Check that errors were set (basic functionality test)
+        // Then
         verify { validatePaymentUseCase.execute(any(), any()) }
     }
 

@@ -16,10 +16,6 @@ data class UserAccount(
         return amount > 0 && amount <= balance
     }
 
-    fun updateBalance(newBalance: Double): UserAccount {
-        return copy(balance = maxOf(0.0, newBalance))
-    }
-
     fun deductAmount(amount: Double): UserAccount {
         return if (canTransfer(amount)) {
             copy(balance = balance - amount)

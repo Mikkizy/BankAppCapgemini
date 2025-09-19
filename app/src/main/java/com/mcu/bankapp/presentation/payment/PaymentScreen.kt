@@ -70,7 +70,6 @@ private fun formatSwiftCodeWithCursor(input: TextFieldValue): SwiftCodeFormatRes
 @Composable
 fun PaymentScreen(
     transferType: TransferType,
-    //viewModel: PaymentViewModel = hiltViewModel(),
     navigateToHome: () -> Unit,
     uiState: PaymentState,
     updateTransferType: (transferType: TransferType) -> Unit,
@@ -79,12 +78,8 @@ fun PaymentScreen(
     updatePaymentData: (paymentData: PaymentData) -> Unit,
     processPayment: () -> Unit
 ) {
-    //val uiState by viewModel.uiState.collectAsState()
-
-    // Local state for SWIFT code TextFieldValue to handle cursor positioning
     var swiftCodeFieldValue by remember { mutableStateOf(TextFieldValue(uiState.paymentData.swiftCode)) }
 
-    // Sync SWIFT code field value with ViewModel state
     LaunchedEffect(uiState.paymentData.swiftCode) {
         if (swiftCodeFieldValue.text != uiState.paymentData.swiftCode) {
             swiftCodeFieldValue = TextFieldValue(
@@ -95,7 +90,6 @@ fun PaymentScreen(
     }
 
     LaunchedEffect(transferType) {
-        //viewModel.updateTransferType(transferType)
         updateTransferType(transferType)
     }
 

@@ -49,30 +49,23 @@ class HomeScreenIntegrationTest {
 
     @Test
     fun homeScreen_navigatesToInternationalPayment() {
-        // Wait for home screen to load
         composeTestRule.waitForIdle()
 
-        // Verify home screen is displayed
         composeTestRule.onNodeWithTag("HomeScreen").assertIsDisplayed()
 
-        // Click international transfer button
         composeTestRule.onNodeWithTag("InternationalTransferButton").performClick()
 
-        // Verify navigation to payment screen
         composeTestRule.onNodeWithTag("PaymentScreen").assertIsDisplayed()
         composeTestRule.onNodeWithTag("ScreenTitle").assertTextEquals("International Transfer")
 
-        // Verify international-specific fields are present
         composeTestRule.onNodeWithTag("IbanField").assertIsDisplayed()
         composeTestRule.onNodeWithTag("SwiftCodeField").assertIsDisplayed()
     }
 
     @Test
     fun homeScreen_buttonsAreClickable() {
-        // Wait for home screen to load
         composeTestRule.waitForIdle()
 
-        // Verify buttons are enabled and clickable
         composeTestRule.onNodeWithTag("DomesticTransferButton")
             .assertIsEnabled()
             .assertHasClickAction()

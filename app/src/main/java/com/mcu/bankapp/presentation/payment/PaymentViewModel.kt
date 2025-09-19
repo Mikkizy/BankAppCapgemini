@@ -90,11 +90,9 @@ class PaymentViewModel @Inject constructor(
                 )
 
                 viewModelScope.launch {
-                    // Deduct balance first
                     val balanceResult = userRepository.deductBalance(amount!!)
 
                     if (balanceResult.isSuccess) {
-                        // Process payment
                         val result = processPaymentUseCase.execute()
 
                         _uiState.value = _uiState.value.copy(
